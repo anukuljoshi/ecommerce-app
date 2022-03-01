@@ -7,7 +7,11 @@ class ProductCategory(models.Model):
     description = models.CharField(max_length=512)
     slug = models.SlugField(unique=True, null=True, blank=True)
     parent = models.ForeignKey(
-        "self", null=True, blank=True, related_name="children", on_delete=models.CASCADE
+        "self",
+        null=True,
+        blank=True,
+        related_name="child_categories",
+        on_delete=models.CASCADE,
     )
 
     class Meta:

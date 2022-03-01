@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import Group
 
-from .models import MyUser
+from .models import MyUser, Address, OrderItem, Order
 
 
 class MyUserCreationForm(UserCreationForm):
@@ -35,3 +35,6 @@ class MyUserAdmin(UserAdmin):
 
 admin.site.register(MyUser, UserAdmin)
 admin.site.unregister(Group)
+admin.site.register(Address)
+admin.site.register(Order)
+admin.site.register(OrderItem)
