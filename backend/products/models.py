@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
 
@@ -25,6 +26,33 @@ class ProductCategory(models.Model):
             self.parent = None
 
         return super(ProductCategory, self).save(*args, **kwargs)
+
+    def get_all_children(self):
+        children = [self]
+        try:
+            child_list = self.child_categories.all()
+        except:
+            return children
+
+        for child in child_list:
+            children.extend(child.get_all_children())
+
+        return children
+
+    def get_all_parents(self):
+        parents = [self]
+        if self.parent is not None:
+            parent = self.parent
+            parents.extend(parent.get_all_parents())
+
+        return parents
+
+    def clean(self):
+        if self.parent in self.get_all_children():
+            raise ValidationError(
+                "A user cannot have itself \
+                    or one of its' children as parent."
+            )
 
     def __str__(self):
         return self.name
