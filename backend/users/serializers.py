@@ -25,6 +25,7 @@ class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = [
+            "pk",
             "user",
             "location",
             "location2",
@@ -33,6 +34,17 @@ class AddressSerializer(serializers.ModelSerializer):
             "country",
             "default",
         ]
+        read_only_fields = ["user"]
+
+    def update(self, instance, validated_data):
+        instance.location = validated_data.get("location", instance.location)
+        instance.location2 = validated_data.get("location2", instance.location2)
+        instance.location3 = validated_data.get("location3", instance.location3)
+        instance.city = validated_data.get("city", instance.city)
+        instance.country = validated_data.get("country", instance.country)
+        instance.default = validated_data.get("default", instance.default)
+        instance.save()
+        return instance
 
 
 class MyUserSerializer(serializers.ModelSerializer):

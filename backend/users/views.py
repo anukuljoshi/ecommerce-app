@@ -36,6 +36,80 @@ def sign_up(request, *args, **kwargs):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
+def get_user_default_address(request, *args, **kwargs):
+    user = request.user
+
+    # get addresses for auth user
+    address = Address.objects.filter(user=user, default=True).first()
+
+    # create address serializer for addresses
+    address_serializer = AddressSerializer(address)
+
+    return Response(address_serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def get_user_addresses(request, *args, **kwargs):
+    user = request.user
+
+    # get addresses for auth user
+    addresses = Address.objects.filter(user=user)
+
+    # create address serializer for addresses
+    addresses_serializer = AddressSerializer(addresses, many=True)
+
+    return Response(addresses_serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def create_user_address(request, *args, **kwargs):
+    user = request.user
+
+    # create address serializer from request data
+    address_serializer = AddressSerializer(data=request.data)
+
+    if address_serializer.is_valid():
+        # if serializer valid save address for auth user
+        address = address_serializer.save(user=user)
+        address_serializer = AddressSerializer(address)
+        return Response(address_serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(address_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["PATCH"])
+@permission_classes([IsAuthenticated])
+def update_user_address(request, *args, **kwargs):
+    user = request.user
+    addressId = kwargs.get("addressId")
+
+    # find the address to be update
+    address = Address.objects.filter(pk=addressId).first()
+
+    if not address:
+        # address not found return 404
+        return Response({"message": "not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    # update address with new data
+    address_serializer = AddressSerializer(
+        instance=address, data=request.data, partial=True
+    )
+
+    if address_serializer.is_valid():
+        # if valid save new address
+        address_serializer.update(
+            instance=address, validated_data=address_serializer.validated_data
+        )
+        address_serializer = AddressSerializer(address)
+        return Response(address_serializer.data, status=status.HTTP_200_OK)
+
+    return Response(address_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def get_cart(request, *args, **kwargs):
     user = request.user
 
