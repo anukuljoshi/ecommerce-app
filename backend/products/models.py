@@ -3,10 +3,15 @@ from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 
 
+def get_product_category_image_path(instance, filename):
+    return f"images/categories/" + filename
+
+
 class ProductCategory(models.Model):
     name = models.CharField(max_length=64, unique=True)
     description = models.CharField(max_length=512)
     slug = models.SlugField(unique=True, null=True, blank=True)
+    image = models.ImageField(upload_to=get_product_category_image_path)
     parent = models.ForeignKey(
         "self",
         null=True,

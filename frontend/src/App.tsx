@@ -1,8 +1,12 @@
+import Layout from "./components/layout/Layout";
+
+import MainRoutes from "./routes";
+
 const App = () => {
 	return (
-		<div>
-			<h1>Hello World</h1>
-		</div>
+		<Layout>
+			<MainRoutes />
+		</Layout>
 	);
 };
 

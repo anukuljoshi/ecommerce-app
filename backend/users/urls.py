@@ -6,8 +6,9 @@ from . import views
 
 urlpatterns = [
     path("", views.home),
+    path("me/", views.get_auth_user),
     path("signup/", views.sign_up),
-    path("login/", token_views.obtain_auth_token),
+    path("login/", views.CustomAuthToken.as_view()),
     path("cart/", views.get_cart),
     path("cart/add/<str:productId>/", views.add_to_cart),
     path("cart/remove/<str:productId>/", views.remove_from_cart),
