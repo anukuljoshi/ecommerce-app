@@ -9,6 +9,7 @@ import SignupPage from "./pages/auth/signup";
 
 import { URLRoutes } from "./constants/URLRoutes";
 import ProductListPage from "./pages/products/list";
+import ProductDetailPage from "./pages/products/detail";
 
 const MainRoutes = () => {
 	return (
@@ -19,6 +20,10 @@ const MainRoutes = () => {
 				<Route
 					path={"category/:category"}
 					element={<ProductListPage />}
+				/>
+				<Route
+					path={"category/:category/products/:product"}
+					element={<ProductDetailPage />}
 				/>
 			</Route>
 			<Route path={`${URLRoutes.SIGNUP}`} element={<UnAuthRoute />}>

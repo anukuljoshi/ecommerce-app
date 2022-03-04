@@ -42,7 +42,6 @@ def get_category_detail(request, *args, **kwargs):
         return Response({"message": "not found"}, status=status.HTTP_404_NOT_FOUND)
 
     category_serializer = ProductCategorySerializer(category)
-    print(category_serializer.data)
     return Response(category_serializer.data, status=status.HTTP_200_OK)
 
 
@@ -95,6 +94,8 @@ def get_category_products(request, *args, **kwargs):
 def get_product_detail(request, *args, **kwargs):
     user = request.user
     product_slug = kwargs.get("product")
+
+    print(product_slug)
 
     # get product for slug
     product = Product.objects.filter(slug=product_slug).first()

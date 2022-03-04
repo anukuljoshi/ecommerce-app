@@ -61,3 +61,44 @@ export const productListReducer = (
 			return state;
 	}
 };
+
+interface IProductDetailState {
+	loading: boolean;
+	error: boolean;
+	product: IProduct | null;
+}
+
+const productDetailState: IProductDetailState = {
+	loading: false,
+	error: false,
+	product: null,
+};
+
+export const productDetailReducer = (
+	state = productDetailState,
+	action: any
+): IProductDetailState => {
+	switch (action.type) {
+		case ActionTypes.PRODUCT_DETAIL_LOADING:
+			return {
+				...state,
+				loading: true,
+				error: false,
+			};
+		case ActionTypes.PRODUCT_DETAIL_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				error: false,
+				product: action.payload,
+			};
+		case ActionTypes.PRODUCT_DETAIL_ERROR:
+			return {
+				...state,
+				loading: false,
+				error: true,
+			};
+		default:
+			return state;
+	}
+};

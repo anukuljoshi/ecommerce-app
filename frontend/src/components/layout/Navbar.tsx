@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-import { AppBar, Container, Stack, Toolbar } from "@mui/material";
+import { AppBar, Container, Stack, Toolbar, Typography } from "@mui/material";
 
 import { logoutUserAction } from "../../redux/actions/auth";
 import { IStoreState } from "../../redux/store";
 
 import { URLRoutes } from "../../constants/URLRoutes";
+import { COLORS } from "../../constants/colors";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<AppBar sx={{ zIndex: 2000 }}>
+		<AppBar sx={{ zIndex: 2000, background: `${COLORS.PRIMARY}` }}>
 			<Toolbar>
 				<Stack
 					component={Container}
@@ -28,7 +29,11 @@ const Navbar = () => {
 					alignItems={"center"}
 				>
 					<Stack direction={"row"} justifyContent={"start"}>
-						<Link to={`${URLRoutes.HOME}`}>Shop</Link>
+						<Link to={`${URLRoutes.HOME}`}>
+                            <Typography variant={"h6"}>
+                                Shop
+                            </Typography>
+                        </Link>
 					</Stack>
 					<Stack
 						direction={"row"}

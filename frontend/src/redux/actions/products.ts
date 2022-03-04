@@ -69,9 +69,33 @@ export const getCategoryProductsAction = (category: string) => {
 				}
 			})
 			.catch((error) => {
-				console.log("get category, products action", error);
+				console.log("get category products action", error);
 				dispatch({
 					type: ActionTypes.PRODUCT_LIST_ERROR,
+				});
+			});
+	};
+};
+
+export const getProductDetail = (product: string) => {
+	return (dispatch: Dispatch) => {
+		dispatch({
+			type: ActionTypes.PRODUCT_DETAIL_LOADING,
+		});
+		axiosInstance
+			.get(`store/products/${product}/`)
+			.then((res) => {
+				if (res.status === 200) {
+					dispatch({
+						type: ActionTypes.PRODUCT_DETAIL_SUCCESS,
+						payload: res.data,
+					});
+				}
+			})
+			.catch((error) => {
+				console.log("get product detail action", error);
+				dispatch({
+					type: ActionTypes.PRODUCT_DETAIL_ERROR,
 				});
 			});
 	};

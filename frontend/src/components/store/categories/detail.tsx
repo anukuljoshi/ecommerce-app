@@ -65,7 +65,7 @@ const CategoryDetail = ({
 				<Chip
 					label={category.name}
 					// variant={"outlined"}
-					color={"success"}
+					color={"primary"}
 				/>
 				{child_categories.length > 0 && (
 					<>
@@ -77,7 +77,7 @@ const CategoryDetail = ({
 								<Chip
 									label={child_category.name}
 									variant={"outlined"}
-									color={"primary"}
+									color={"success"}
 									clickable
 								/>
 							</Link>

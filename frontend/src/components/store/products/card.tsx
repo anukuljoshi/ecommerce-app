@@ -1,3 +1,6 @@
+import { Button, Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
+
 import { BASE_URL } from "../../../constants/api";
 
 interface ProductCardProps {
@@ -6,7 +9,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
 	return (
-		<div className={"shadow-md"}>
+		<div className={"shadow-md bg-primary text-white"}>
 			<div>
 				<img
 					className={"h-full w-full object-cover"}
@@ -14,9 +17,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
 					alt={product.title}
 				/>
 			</div>
-			<div className="px-2 py-1">
-				<p className={"text-4xl"}>{product.title}</p>
-			</div>
+			<Stack sx={{ p: 2 }} spacing={1}>
+				<div>
+					<Typography variant={"h4"}>{product.title}</Typography>
+					<Typography variant={"body1"}>
+						{product.description}
+					</Typography>
+					<Typography variant={"h5"}>{product.price}</Typography>
+				</div>
+				<Stack direction={"row"} spacing={1}>
+					<Button variant={"outlined"}>Add to Cart</Button>
+					<Link to={`products/${product.slug}`}>
+						<Button variant={"contained"}>View Detail</Button>
+					</Link>
+				</Stack>
+			</Stack>
 		</div>
 	);
 };
