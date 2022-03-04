@@ -1,7 +1,6 @@
 import axios from "axios";
 import * as yup from "yup";
 import { Formik } from "formik";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -13,11 +12,13 @@ import {
 	Typography,
 } from "@mui/material";
 
-import { BASE_API_URL } from "../../constants/api";
 import { loginUserAction } from "../../redux/actions/auth";
+import { useAppDispatch } from "../../redux/store";
+
+import { BASE_API_URL } from "../../constants/api";
 
 const LoginForm = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	return (
 		<Formik

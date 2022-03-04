@@ -33,7 +33,6 @@ interface IProductSummary {
 	pk: string | number;
 	title: string;
 	price: number;
-	units: number;
 	slug: string;
-	product_images: IProductImage[];
+	category: IProductCategorySummary;
 }

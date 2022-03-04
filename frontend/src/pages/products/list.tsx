@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { Typography } from "@mui/material";
@@ -11,11 +11,11 @@ import {
 	getCategoryProductsAction,
 	setCategoryAction,
 } from "../../redux/actions/products";
-import { IStoreState } from "../../redux/store";
+import { IStoreState, useAppDispatch } from "../../redux/store";
 
 const ProductListPage = () => {
 	const params: any = useParams();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const { error, category, products, child_categories } = useSelector(
 		(state: IStoreState) => state.products.list

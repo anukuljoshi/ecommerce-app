@@ -1,15 +1,14 @@
-import { Dispatch } from "redux";
-
+import { AppDispatch } from "../store";
 import { ActionTypes } from "../types/ActionTypes";
 
 export const loginUserAction = (data: any) => {
-	return (dispatch: Dispatch) => {
+	return (dispatch: AppDispatch) => {
 		dispatch({ type: ActionTypes.USER_LOGIN, payload: data });
 	};
 };
 
 export const logoutUserAction = () => {
-	return (dispatch: Dispatch) => {
+	return (dispatch: AppDispatch) => {
 		dispatch({ type: ActionTypes.USER_LOGOUT });
 	};
 };

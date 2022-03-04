@@ -1,15 +1,16 @@
-import { Dispatch } from "redux";
+import { AppDispatch } from "../store";
 
 import axiosInstance from "../../services/axiosInstance";
 
 import { ActionTypes } from "../types/ActionTypes";
+
 
 export const getCategoryListAction = (category?: string) => {
 	let url = "/store/category/";
 	if (category) {
 		url += `${category}/`;
 	}
-	return (dispatch: Dispatch) => {
+	return (dispatch: AppDispatch) => {
 		axiosInstance
 			.get(`${url}`)
 			.then((res) => {
@@ -30,7 +31,7 @@ export const getCategoryListAction = (category?: string) => {
 };
 
 export const setCategoryAction = (category: string) => {
-	return (dispatch: Dispatch) => {
+	return (dispatch: AppDispatch) => {
 		dispatch({
 			type: ActionTypes.PRODUCT_LIST_LOADING,
 		});
@@ -54,7 +55,7 @@ export const setCategoryAction = (category: string) => {
 };
 
 export const getCategoryProductsAction = (category: string) => {
-	return (dispatch: Dispatch) => {
+	return (dispatch: AppDispatch) => {
 		dispatch({
 			type: ActionTypes.PRODUCT_LIST_LOADING,
 		});
@@ -78,7 +79,7 @@ export const getCategoryProductsAction = (category: string) => {
 };
 
 export const getProductDetail = (product: string) => {
-	return (dispatch: Dispatch) => {
+	return (dispatch: AppDispatch) => {
 		dispatch({
 			type: ActionTypes.PRODUCT_DETAIL_LOADING,
 		});

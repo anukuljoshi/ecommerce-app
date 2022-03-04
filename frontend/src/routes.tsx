@@ -10,6 +10,7 @@ import SignupPage from "./pages/auth/signup";
 import { URLRoutes } from "./constants/URLRoutes";
 import ProductListPage from "./pages/products/list";
 import ProductDetailPage from "./pages/products/detail";
+import UserCartPage from "./pages/users/cart";
 
 const MainRoutes = () => {
 	return (
@@ -25,6 +26,7 @@ const MainRoutes = () => {
 					path={"category/:category/products/:product"}
 					element={<ProductDetailPage />}
 				/>
+				<Route path={"user/cart"} element={<UserCartPage />} />
 			</Route>
 			<Route path={`${URLRoutes.SIGNUP}`} element={<UnAuthRoute />}>
 				<Route path={""} element={<SignupPage />} />

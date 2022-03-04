@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import { AppBar, Container, Stack, Toolbar, Typography } from "@mui/material";
 
 import { logoutUserAction } from "../../redux/actions/auth";
-import { IStoreState } from "../../redux/store";
+import { IStoreState, useAppDispatch } from "../../redux/store";
 
 import { URLRoutes } from "../../constants/URLRoutes";
 import { COLORS } from "../../constants/colors";
 
 const Navbar = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { user } = useSelector((state: IStoreState) => state.auth);
 
@@ -30,10 +30,8 @@ const Navbar = () => {
 				>
 					<Stack direction={"row"} justifyContent={"start"}>
 						<Link to={`${URLRoutes.HOME}`}>
-                            <Typography variant={"h6"}>
-                                Shop
-                            </Typography>
-                        </Link>
+							<Typography variant={"h6"}>Shop</Typography>
+						</Link>
 					</Stack>
 					<Stack
 						direction={"row"}
