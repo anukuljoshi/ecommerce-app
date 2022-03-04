@@ -7,51 +7,46 @@ interface IAuthUser {
 }
 
 interface IAuthUserState {
+	loading: boolean;
 	error: boolean;
 	user: IAuthUser | null;
-	token: string;
 }
 
 const authUserState: IAuthUserState = {
+	loading: false,
 	error: false,
-	user: null,
-	token: "",
+	user: !!localStorage.getItem("auth-user")
+		? JSON.parse(localStorage.getItem("auth-user")!)
+		: null,
 };
 
 export const authUserReducer = (
 	state = authUserState,
 	action: any
 ): IAuthUserState => {
-	let token;
 	switch (action.type) {
 		case ActionTypes.USER_LOGIN:
+			localStorage.setItem("auth-user", JSON.stringify(action.payload));
 			localStorage.setItem("auth-token", action.payload.token);
 			return {
 				...state,
 				error: false,
-				user: {
-					pk: action.payload.pk,
-					username: action.payload.username,
-					email: action.payload.email,
-				},
-				token: action.payload.token,
+				user: action.payload,
 			};
-		case ActionTypes.AUTH_USER_SUCCESS:
-			token = localStorage.getItem("auth-token") || "";
+		case ActionTypes.AUTH_USER_LOADING:
 			return {
 				...state,
+				loading: true,
 				error: false,
-				user: action.payload,
-				token: token,
 			};
 		case ActionTypes.AUTH_USER_ERROR:
 		case ActionTypes.USER_LOGOUT:
 			localStorage.removeItem("auth-token");
+			localStorage.removeItem("auth-user");
 			return {
 				...state,
 				error: true,
 				user: null,
-				token: "",
 			};
 		default:
 			return state;

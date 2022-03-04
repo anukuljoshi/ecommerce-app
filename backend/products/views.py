@@ -30,6 +30,24 @@ def get_all_products(request, *args, **kwargs):
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
+def get_category_detail(request, *args, **kwargs):
+    user = request.user
+    category_slug = kwargs.get("category")
+
+    # get category detail
+    category = ProductCategory.objects.filter(slug=category_slug).first()
+
+    if not category:
+        # if no category => not found
+        return Response({"message": "not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    category_serializer = ProductCategorySerializer(category)
+    print(category_serializer.data)
+    return Response(category_serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
 def get_categories(request, *args, **kwargs):
     user = request.user
     category_slug = kwargs.get("category")

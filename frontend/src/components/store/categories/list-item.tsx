@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import CategoryCard from "../../ui/cards/CategoryCard";
+import CategoryCard from "./card";
 
 interface CategoriesListItemProps {
 	category: IProductCategory;

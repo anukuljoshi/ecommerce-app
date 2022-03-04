@@ -21,7 +21,7 @@ export const getCategoryListAction = (category?: string) => {
 				}
 			})
 			.catch((error) => {
-				console.log("getCategoryListAction");
+				console.log("getCategoryListAction", error);
 				dispatch({
 					type: ActionTypes.CATEGORY_LIST_ERROR,
 				});
@@ -31,12 +31,33 @@ export const getCategoryListAction = (category?: string) => {
 
 export const setCategoryAction = (category: string) => {
 	return (dispatch: Dispatch) => {
-		dispatch({ type: ActionTypes.SET_CATEGORY, payload: category });
+		dispatch({
+			type: ActionTypes.PRODUCT_LIST_LOADING,
+		});
+		axiosInstance
+			.get(`/store/category/${category}/detail/`)
+			.then((res) => {
+				if (res.status === 200) {
+					dispatch({
+						type: ActionTypes.SET_CATEGORY,
+						payload: res.data,
+					});
+				}
+			})
+			.catch((error) => {
+				console.log("set category action", error);
+				dispatch({
+					type: ActionTypes.PRODUCT_LIST_ERROR,
+				});
+			});
 	};
 };
 
 export const getCategoryProductsAction = (category: string) => {
 	return (dispatch: Dispatch) => {
+		dispatch({
+			type: ActionTypes.PRODUCT_LIST_LOADING,
+		});
 		axiosInstance
 			.get(`/store/category/${category}/products/`)
 			.then((res) => {
@@ -48,7 +69,7 @@ export const getCategoryProductsAction = (category: string) => {
 				}
 			})
 			.catch((error) => {
-				console.log("getCategoryListAction");
+				console.log("get category, products action", error);
 				dispatch({
 					type: ActionTypes.PRODUCT_LIST_ERROR,
 				});

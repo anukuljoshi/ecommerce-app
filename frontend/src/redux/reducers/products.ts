@@ -1,15 +1,17 @@
 import { ActionTypes } from "../types/ActionTypes";
 
 interface IProductListState {
+	loading: boolean;
 	error: boolean;
-	category: string;
+	category: IProductCategory | null;
 	products: IProduct[];
 	child_categories: IProductCategory[];
 }
 
 const productListState: IProductListState = {
+	loading: false,
 	error: false,
-	category: "",
+	category: null,
 	products: [],
 	child_categories: [],
 };
@@ -23,29 +25,37 @@ export const productListReducer = (
 			return {
 				...state,
 				error: false,
+				loading: false,
 				category: action.payload,
 			};
 		case ActionTypes.CATEGORY_LIST_SUCCESS:
 			return {
 				...state,
 				error: false,
+				loading: false,
 				child_categories: action.payload,
-			};
-		case ActionTypes.CATEGORY_LIST_ERROR:
-			return {
-				...state,
-				error: true,
 			};
 		case ActionTypes.PRODUCT_LIST_SUCCESS:
 			return {
 				...state,
 				error: false,
+				loading: false,
 				products: action.payload,
+			};
+
+		case ActionTypes.PRODUCT_LIST_LOADING:
+			return {
+				...state,
+				error: false,
+				loading: true,
+				products: [],
+				child_categories: [],
 			};
 		case ActionTypes.PRODUCT_LIST_ERROR:
 			return {
 				...state,
 				error: true,
+				loading: false,
 			};
 		default:
 			return state;

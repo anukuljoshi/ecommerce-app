@@ -8,12 +8,18 @@ import LoginPage from "./pages/auth/login";
 import SignupPage from "./pages/auth/signup";
 
 import { URLRoutes } from "./constants/URLRoutes";
+import ProductListPage from "./pages/products/list";
 
 const MainRoutes = () => {
 	return (
 		<Routes>
 			<Route path={""} element={<AuthRoute />}>
 				<Route path={""} element={<HomePage />} />
+				<Route path={"category"} element={<HomePage />} />
+				<Route
+					path={"category/:category"}
+					element={<ProductListPage />}
+				/>
 			</Route>
 			<Route path={`${URLRoutes.SIGNUP}`} element={<UnAuthRoute />}>
 				<Route path={""} element={<SignupPage />} />

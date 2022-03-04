@@ -6,4 +6,10 @@ export enum URLRoutes {
 
 	USER = "user",
 	CART = "cart",
+
+	CATEGORY = "category",
+	CATEGORY_SLUG = ":category",
+
+	PRODUCTS = "products",
+	PRODUCT_SLUG = ":product",
 }

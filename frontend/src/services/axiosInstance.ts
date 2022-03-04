@@ -8,4 +8,16 @@ const axiosInstance = axios.create({
 	},
 });
 
+axiosInstance.interceptors.request.use((req) => {
+	let token = localStorage.getItem("auth-token");
+
+	if (!token) {
+		localStorage.removeItem("auth-user");
+		localStorage.removeItem("auth-token");
+		return req;
+	}
+	req.headers!.Authorization = `Token ${token}`;
+	return req;
+});
+
 export default axiosInstance;

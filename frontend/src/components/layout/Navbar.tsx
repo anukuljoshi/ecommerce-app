@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AppBar, Container, Stack, Toolbar } from "@mui/material";
 
@@ -10,10 +10,16 @@ import { URLRoutes } from "../../constants/URLRoutes";
 
 const Navbar = () => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const { user } = useSelector((state: IStoreState) => state.auth);
 
+	const handleLogout = () => {
+		dispatch(logoutUserAction());
+		navigate(`/${URLRoutes.LOGIN}`);
+	};
+
 	return (
-		<AppBar>
+		<AppBar sx={{ zIndex: 2000 }}>
 			<Toolbar>
 				<Stack
 					component={Container}
@@ -39,7 +45,7 @@ const Navbar = () => {
 								</Link>
 								<span
 									className="cursor-pointer"
-									onClick={() => dispatch(logoutUserAction())}
+									onClick={handleLogout}
 								>
 									Log Out
 								</span>
