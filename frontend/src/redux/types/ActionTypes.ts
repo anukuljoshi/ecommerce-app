@@ -1,4 +1,6 @@
 export enum ActionTypes {
+	SET_THEME = "SET_THEME",
+
 	// auth
 	USER_LOGIN = "USER_LOGIN",
 	USER_LOGOUT = "USER_LOGOUT",

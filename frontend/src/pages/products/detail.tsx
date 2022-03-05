@@ -6,8 +6,8 @@ import { Typography } from "@mui/material";
 
 import ProductDetail from "../../components/store/products/detail";
 
-import { getProductDetail } from "../../redux/actions/products";
 import { IStoreState, useAppDispatch } from "../../redux/store";
+import { getProductDetail } from "../../redux/actions/products";
 
 const ProductDetailPage = () => {
 	const dispatch = useAppDispatch();

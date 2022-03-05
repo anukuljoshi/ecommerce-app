@@ -6,12 +6,12 @@ import { Typography } from "@mui/material";
 
 import CategoryDetail from "../../components/store/categories/detail";
 
+import { IStoreState, useAppDispatch } from "../../redux/store";
 import {
 	getCategoryListAction,
 	getCategoryProductsAction,
 	setCategoryAction,
 } from "../../redux/actions/products";
-import { IStoreState, useAppDispatch } from "../../redux/store";
 
 const ProductListPage = () => {
 	const params: any = useParams();

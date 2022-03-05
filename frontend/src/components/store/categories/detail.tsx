@@ -31,12 +31,8 @@ const CategoryDetail = ({
 					/>
 					<IconButton
 						onClick={() => setDrawerState(true)}
-						sx={{
-							background: COLORS.PRIMARY,
-							":hover": { background: COLORS.PRIMARY },
-						}}
 					>
-						<ChevronRightRounded sx={{ color: COLORS.LIGHT }} />
+						<ChevronRightRounded  />
 					</IconButton>
 				</>
 			)} */}

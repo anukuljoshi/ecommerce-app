@@ -5,8 +5,8 @@ import { Typography } from "@mui/material";
 
 import CategoriesList from "../components/store/categories/list";
 
-import { getCategoryListAction } from "../redux/actions/products";
 import { IStoreState, useAppDispatch } from "../redux/store";
+import { getCategoryListAction } from "../redux/actions/products";
 
 const HomePage = () => {
 	const dispatch = useAppDispatch();

@@ -12,8 +12,8 @@ import {
 	Typography,
 } from "@mui/material";
 
-import { loginUserAction } from "../../redux/actions/auth";
 import { useAppDispatch } from "../../redux/store";
+import { loginUserAction } from "../../redux/actions/auth";
 
 import { BASE_API_URL } from "../../constants/api";
 

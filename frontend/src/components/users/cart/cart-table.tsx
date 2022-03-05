@@ -10,25 +10,34 @@ import {
 
 import CartListItem from "./cart-list-item";
 
-import { COLORS } from "../../../constants/colors";
-
 interface CartTableProps {
 	items: IOrderItem[];
 }
 
 const CartTable = ({ items }: CartTableProps) => {
 	return (
-		<TableContainer component={Paper} sx={{ background: COLORS.PRIMARY }}>
+		<TableContainer component={Paper}>
 			<Table>
 				<TableHead>
 					<TableRow>
-						<TableCell align={"center"} sx={{ width: 60 }}>
+						<TableCell
+							align={"center"}
+							sx={{ width: 60, fontWeight: "bold" }}
+						>
 							{"S.No."}
 						</TableCell>
-						<TableCell sx={{ maxWidth: 200 }}>{"Item"}</TableCell>
-						<TableCell align={"center"}>{"Price"}</TableCell>
-						<TableCell align={"center"}>{"Qty"}</TableCell>
-						<TableCell align={"center"}>{"Cost"}</TableCell>
+						<TableCell sx={{ fontWeight: "bold" }}>
+							{"Item"}
+						</TableCell>
+						<TableCell align={"center"} sx={{ fontWeight: "bold" }}>
+							{"Price"}
+						</TableCell>
+						<TableCell align={"center"} sx={{ fontWeight: "bold" }}>
+							{"Qty"}
+						</TableCell>
+						<TableCell align={"center"} sx={{ fontWeight: "bold" }}>
+							{"Cost"}
+						</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>

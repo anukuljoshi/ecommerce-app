@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+
 import ProductCard from "./card";
 
 interface ProductListProps {

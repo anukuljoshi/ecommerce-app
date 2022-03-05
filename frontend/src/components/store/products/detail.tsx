@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import {
 	Button,
+	Card,
 	Radio,
 	Stack,
 	Typography,
@@ -11,10 +12,11 @@ import {
 
 import PopNotification from "../../ui/pop-notify";
 
+import { useAppDispatch } from "../../../redux/store";
 import { addProductToCartAction } from "../../../redux/actions/users";
 
 import { BASE_URL } from "../../../constants/api";
-import { useAppDispatch } from "../../../redux/store";
+
 interface ProductDetailProps {
 	product: IProduct;
 }
@@ -38,10 +40,10 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
 	};
 
 	return (
-		<>
+		<Card>
 			<Stack
 				direction={smallScreen ? "column" : "row"}
-				className={"shadow-md bg-primary text-white"}
+				className={"shadow-md"}
 			>
 				<div
 					className={`${
@@ -60,14 +62,14 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
 					{product.product_images.length > 1 && (
 						<div
 							className={
-								"absolute bottom-0 bg-background left-1/2 -translate-x-1/2"
+								"absolute bottom-0 left-1/2 -translate-x-1/2"
 							}
 						>
 							{product.product_images.map((image, index) => (
 								<Radio
 									key={index}
 									name={"image buttons"}
-									color={"success"}
+									color={"primary"}
 									size={"small"}
 									checked={activeImage === index}
 									value={index}
@@ -107,7 +109,7 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
 				open={notificationOpen}
 				setOpen={setNotificationOpen}
 			/>
-		</>
+		</Card>
 	);
 };
 

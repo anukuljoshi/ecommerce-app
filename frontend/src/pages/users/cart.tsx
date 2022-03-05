@@ -5,11 +5,11 @@ import { Typography } from "@mui/material";
 
 import Cart from "../../components/users/cart/cart";
 
+import { IStoreState, useAppDispatch } from "../../redux/store";
 import {
 	getUserCartAction,
 	getUserDetailAction,
 } from "../../redux/actions/users";
-import { IStoreState, useAppDispatch } from "../../redux/store";
 
 const UserCartPage = () => {
 	const dispatch = useAppDispatch();

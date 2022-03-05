@@ -2,8 +2,6 @@ import { Card, Grid, Typography } from "@mui/material";
 
 import CartTable from "./cart-table";
 
-import { COLORS } from "../../../constants/colors";
-
 interface CartProps {
 	cart: IOrder;
 }
@@ -16,7 +14,7 @@ const Cart = ({ cart }: CartProps) => {
 					{cart.order_items.length > 0 ? (
 						<CartTable items={cart.order_items} />
 					) : (
-						<Card sx={{ px: 4, py: 2, background: COLORS.PRIMARY }}>
+						<Card sx={{ px: 4, py: 2 }}>
 							<Typography variant={"h5"}>
 								No item in cart
 							</Typography>

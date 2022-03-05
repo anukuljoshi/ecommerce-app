@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -10,11 +9,11 @@ import {
 } from "@mui/material";
 import { AddRounded, RemoveRounded } from "@mui/icons-material";
 
+import { useAppDispatch } from "../../../redux/store";
 import {
 	addProductToCartAction,
 	removeProductFromCartAction,
 } from "../../../redux/actions/users";
-import { useAppDispatch } from "../../../redux/store";
 
 import { URLRoutes } from "../../../constants/URLRoutes";
 

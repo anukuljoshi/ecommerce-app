@@ -1,25 +1,31 @@
-import { createTheme, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 
-import Layout from "./components/layout/Layout";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 import MainRoutes from "./routes";
+import Layout from "./components/layout/Layout";
+
+import { IStoreState } from "./redux/store";
 
 const App = () => {
-	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+	const { theme: themeMode } = useSelector(
+		(state: IStoreState) => state.theme
+	);
 
 	const theme = useMemo(
 		() =>
 			createTheme({
 				palette: {
-					mode: prefersDarkMode ? "dark" : "light",
+					mode: themeMode,
 				},
 			}),
-		[prefersDarkMode]
+		[themeMode]
 	);
 
 	return (
 		<ThemeProvider theme={theme}>
+            <CssBaseline />
 			<Layout>
 				<MainRoutes />
 			</Layout>
