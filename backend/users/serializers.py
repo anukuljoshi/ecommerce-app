@@ -11,6 +11,7 @@ class MyUserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
         fields = [
+            "pk",
             "username",
             "email",
             "password",
@@ -27,7 +28,7 @@ class AddressSerializer(serializers.ModelSerializer):
         fields = [
             "pk",
             "user",
-            "location",
+            "location1",
             "location2",
             "location3",
             "city",
@@ -37,7 +38,7 @@ class AddressSerializer(serializers.ModelSerializer):
         read_only_fields = ["user"]
 
     def update(self, instance, validated_data):
-        instance.location = validated_data.get("location", instance.location)
+        instance.location1 = validated_data.get("location1", instance.location1)
         instance.location2 = validated_data.get("location2", instance.location2)
         instance.location3 = validated_data.get("location3", instance.location3)
         instance.city = validated_data.get("city", instance.city)
@@ -61,6 +62,7 @@ class OrderItemCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = [
+            "pk",
             "order",
             "product",
             "quantity",
@@ -74,6 +76,7 @@ class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = [
+            "pk",
             "order",
             "product",
             "quantity",
@@ -89,6 +92,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = [
+            "pk",
             "user",
             "start_date",
             "order_date",

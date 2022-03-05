@@ -33,7 +33,7 @@ const Navbar = () => {
 	};
 
 	return (
-		<AppBar sx={{ zIndex: 2000 }}>
+		<AppBar>
 			<Toolbar>
 				<Stack
 					component={Container}
@@ -53,11 +53,17 @@ const Navbar = () => {
 						spacing={2}
 					>
 						{theme === "dark" ? (
-							<IconButton size={"small"} onClick={handleChangeTheme}>
+							<IconButton
+								size={"small"}
+								onClick={handleChangeTheme}
+							>
 								<LightModeRounded />
 							</IconButton>
 						) : (
-							<IconButton size={"small"} onClick={handleChangeTheme}>
+							<IconButton
+								size={"small"}
+								onClick={handleChangeTheme}
+							>
 								<DarkModeRounded />
 							</IconButton>
 						)}
@@ -67,6 +73,12 @@ const Navbar = () => {
 									to={`/${URLRoutes.USER}/${URLRoutes.CART}`}
 								>
 									Cart
+								</Link>
+
+								<Link
+									to={`/${URLRoutes.USER}/${URLRoutes.ORDERS}`}
+								>
+									Orders
 								</Link>
 								<span
 									className="cursor-pointer"

@@ -43,13 +43,13 @@ const CartListItem = ({ item, index }: CartItemProps) => {
 					<Typography>{item.product.title}</Typography>
 				</Link>
 			</TableCell>
-			<TableCell align={"center"}>
+			<TableCell align={"right"}>
 				<Typography>{item.product.price}</Typography>
 			</TableCell>
-			<TableCell align={"center"}>
+			<TableCell align={"right"}>
 				<Stack
 					direction={"row"}
-					justifyContent={"center"}
+					justifyContent={"right"}
 					alignItems={"center"}
 					spacing={1}
 				>
@@ -62,7 +62,7 @@ const CartListItem = ({ item, index }: CartItemProps) => {
 					</IconButton>
 				</Stack>
 			</TableCell>
-			<TableCell align={"center"}>
+			<TableCell align={"right"}>
 				<Typography>{item.item_price}</Typography>
 			</TableCell>
 		</TableRow>

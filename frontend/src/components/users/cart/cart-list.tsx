@@ -10,18 +10,18 @@ import {
 
 import CartListItem from "./cart-list-item";
 
-interface CartTableProps {
+interface CartListProps {
 	items: IOrderItem[];
 }
 
-const CartTable = ({ items }: CartTableProps) => {
+const CartList = ({ items }: CartListProps) => {
 	return (
 		<TableContainer component={Paper}>
 			<Table>
 				<TableHead>
 					<TableRow>
 						<TableCell
-							align={"center"}
+							align={"right"}
 							sx={{ width: 60, fontWeight: "bold" }}
 						>
 							{"S.No."}
@@ -29,13 +29,13 @@ const CartTable = ({ items }: CartTableProps) => {
 						<TableCell sx={{ fontWeight: "bold" }}>
 							{"Item"}
 						</TableCell>
-						<TableCell align={"center"} sx={{ fontWeight: "bold" }}>
+						<TableCell align={"right"} sx={{ fontWeight: "bold" }}>
 							{"Price"}
 						</TableCell>
-						<TableCell align={"center"} sx={{ fontWeight: "bold" }}>
-							{"Qty"}
+						<TableCell align={"right"} sx={{ fontWeight: "bold" }}>
+							{"Quantity"}
 						</TableCell>
-						<TableCell align={"center"} sx={{ fontWeight: "bold" }}>
+						<TableCell align={"right"} sx={{ fontWeight: "bold" }}>
 							{"Cost"}
 						</TableCell>
 					</TableRow>
@@ -54,4 +54,4 @@ const CartTable = ({ items }: CartTableProps) => {
 	);
 };
 
-export default CartTable;
+export default CartList;

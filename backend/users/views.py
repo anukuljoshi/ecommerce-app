@@ -233,21 +233,26 @@ def remove_from_cart(request, *args, **kwargs):
 @permission_classes([IsAuthenticated])
 def create_order(request, *args, **kwargs):
     user = request.user
+    addressPk = request.data.get("address")
 
     # get current cart
     cart = Order.objects.filter(user=user, ordered=False).first()
+    # get selected address
+    address = Address.objects.filter(user=user, pk=addressPk).first()
 
-    if not cart.order_items.all():
+    if not cart.order_items.all() or not address:
         return Response({"message": "bad request"}, status=status.HTTP_400_BAD_REQUEST)
 
     # make cart to order
     cart.ordered = True
+    cart.address = address
     order = cart.save()
 
     # create new empty cart for user
     cart = Order.objects.create(user=user, ordered=False)
     cart.save()
 
+    # return created order
     order_serializer = OrderSerializer(order)
 
     return Response(order_serializer.data, status=status.HTTP_201_CREATED)

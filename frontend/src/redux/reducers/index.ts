@@ -3,7 +3,11 @@ import { combineReducers } from "redux";
 import { themeReducer } from "./theme";
 import { authUserReducer } from "./auth";
 import { productDetailReducer, productListReducer } from "./products";
-import { userDetailReducer } from "./users";
+import {
+	userAddressReducer,
+	userDetailReducer,
+	userOrderReducer,
+} from "./users";
 
 const rootReducer = combineReducers({
 	theme: themeReducer,
@@ -14,6 +18,8 @@ const rootReducer = combineReducers({
 	}),
 	users: combineReducers({
 		detail: userDetailReducer,
+		address: userAddressReducer,
+		orders: userOrderReducer,
 	}),
 });
 

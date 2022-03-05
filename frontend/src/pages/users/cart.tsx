@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import Cart from "../../components/users/cart/cart";
 
@@ -32,8 +32,15 @@ const UserCartPage = () => {
 
 	return (
 		<>
-			{/* <h1>Hello {user?.username}</h1> */}
-			{user && cart && <Cart cart={cart} />}
+			<Grid container justifyContent={"center"}>
+				<Grid item xs={12} sm={10} md={8} lg={8}>
+					{user && cart && (
+						<>
+							<Cart cart={cart} />
+						</>
+					)}
+				</Grid>
+			</Grid>
 		</>
 	);
 };

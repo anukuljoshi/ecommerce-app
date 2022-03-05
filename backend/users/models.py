@@ -49,18 +49,19 @@ class Address(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="addresses"
     )
-    location = models.CharField(max_length=256)
+    location1 = models.CharField(max_length=256)
     location2 = models.CharField(max_length=256, null=True, blank=True)
     location3 = models.CharField(max_length=256, null=True, blank=True)
     city = models.CharField(max_length=256)
     country = models.CharField(max_length=256)
     default = models.BooleanField(default=False)
 
-    def __str__(self):
-        return f"{self.user.username} address {self.pk}"
-
     class Meta:
         verbose_name_plural = "Addresses"
+        ordering = ["-pk"]
+
+    def __str__(self):
+        return f"{self.user.username} address {self.pk}"
 
 
 class Order(models.Model):
@@ -77,6 +78,9 @@ class Order(models.Model):
         null=True,
         blank=True,
     )
+
+    class Meta:
+        ordering = ["-pk"]
 
     def __str__(self):
         return f"{self.user.username} order {self.pk}"

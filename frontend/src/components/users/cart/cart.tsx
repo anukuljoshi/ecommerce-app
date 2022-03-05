@@ -1,6 +1,10 @@
-import { Card, Grid, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
-import CartTable from "./cart-table";
+import { Box, Button, Card, Typography } from "@mui/material";
+
+import CartList from "./cart-list";
+
+import { URLRoutes } from "../../../constants/URLRoutes";
 
 interface CartProps {
 	cart: IOrder;
@@ -9,19 +13,29 @@ interface CartProps {
 const Cart = ({ cart }: CartProps) => {
 	return (
 		<>
-			<Grid container justifyContent={"center"}>
-				<Grid item xs={12} sm={10} md={8} lg={8}>
-					{cart.order_items.length > 0 ? (
-						<CartTable items={cart.order_items} />
-					) : (
-						<Card sx={{ px: 4, py: 2 }}>
-							<Typography variant={"h5"}>
-								No item in cart
-							</Typography>
-						</Card>
-					)}
-				</Grid>
-			</Grid>
+			{cart.order_items.length > 0 ? (
+				<>
+					<CartList items={cart.order_items} />
+					<Card sx={{ px: 4, py: 2 }}>
+						<Typography variant={"h6"} textAlign={"right"}>
+							{`Total: ${cart.total}`}
+						</Typography>
+					</Card>
+					<Box textAlign={"center"} sx={{ my: 2 }}>
+						<Link
+							to={`/${URLRoutes.USER}/${URLRoutes.ORDERS}/${URLRoutes.CREATE}`}
+						>
+							<Button variant={"contained"} color={"primary"}>
+								Proceed to Buy
+							</Button>
+						</Link>
+					</Box>
+				</>
+			) : (
+				<Card sx={{ px: 4, py: 2 }}>
+					<Typography variant={"h5"}>No item in cart</Typography>
+				</Card>
+			)}
 		</>
 	);
 };

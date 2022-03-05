@@ -15,6 +15,7 @@ interface IUserAddress {
 }
 
 interface IOrderItem {
+	pk: string | number;
 	product: IProductSummary;
 	quantity: number;
 	date_added: string;
@@ -22,6 +23,7 @@ interface IOrderItem {
 }
 
 interface IOrder {
+	pk: string | number;
 	start_date: string;
 	order_date: string;
 	ordered: boolean;
