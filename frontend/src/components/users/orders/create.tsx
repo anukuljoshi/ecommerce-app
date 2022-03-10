@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { AddRounded } from "@mui/icons-material";
 
 import AddressSelectList from "../address/select-list";
-import AddressCreate from "../address/create";
+import AddressCreateModal from "../address/modal";
 
 import { IStoreState, useAppDispatch } from "../../../redux/store";
 import {
@@ -50,8 +50,7 @@ const OrderCreate = () => {
 	};
 
 	return (
-		<>
-			<></>
+		<Stack spacing={1}>
 			{list && (
 				<AddressSelectList
 					list={list}
@@ -59,25 +58,27 @@ const OrderCreate = () => {
 					setSelectedAddress={setSelectedAddress}
 				/>
 			)}
-			<br />
-			<Button
-				variant={"text"}
-				size={"small"}
-				onClick={handleOpen}
-				startIcon={<AddRounded />}
-			>
-				Add New Address
-			</Button>
-			<br />
-			<Button variant={"contained"} onClick={handleOrderCreate}>
-				Create Order
-			</Button>
-			<AddressCreate
+			<div>
+				<Button
+					variant={"text"}
+					size={"small"}
+					onClick={handleOpen}
+					startIcon={<AddRounded />}
+				>
+					Add New Address
+				</Button>
+			</div>
+			<div>
+				<Button variant={"contained"} onClick={handleOrderCreate}>
+					Create Order
+				</Button>
+			</div>
+			<AddressCreateModal
 				open={open}
 				handleOpen={handleOpen}
 				handleClose={handleClose}
 			/>
-		</>
+		</Stack>
 	);
 };
 

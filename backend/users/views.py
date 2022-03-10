@@ -10,6 +10,7 @@ from .models import MyUser, Address, Order, OrderItem
 from .serializers import (
     MyUserCreateSerializer,
     MyUserSerializer,
+    AddressCreateSerializer,
     AddressSerializer,
     OrderSerializer,
     OrderItemSerializer,
@@ -104,7 +105,7 @@ def create_user_address(request, *args, **kwargs):
     user = request.user
 
     # create address serializer from request data
-    address_serializer = AddressSerializer(data=request.data)
+    address_serializer = AddressCreateSerializer(data=request.data)
 
     if address_serializer.is_valid():
         # if serializer valid save address for auth user
@@ -129,7 +130,7 @@ def update_user_address(request, *args, **kwargs):
         return Response({"message": "not found"}, status=status.HTTP_404_NOT_FOUND)
 
     # update address with new data
-    address_serializer = AddressSerializer(
+    address_serializer = AddressCreateSerializer(
         instance=address, data=request.data, partial=True
     )
 
@@ -245,7 +246,7 @@ def create_order(request, *args, **kwargs):
 
     # make cart to order
     cart.ordered = True
-    cart.address = address
+    cart.shipping_address = address
     order = cart.save()
 
     # create new empty cart for user

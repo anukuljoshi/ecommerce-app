@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import CategoryDetail from "../../components/store/categories/detail";
 
@@ -17,9 +17,8 @@ const ProductListPage = () => {
 	const params: any = useParams();
 	const dispatch = useAppDispatch();
 
-	const { error, category, products, child_categories } = useSelector(
-		(state: IStoreState) => state.products.list
-	);
+	const { loading, error, category, products, child_categories } =
+		useSelector((state: IStoreState) => state.products.list);
 
 	useEffect(() => {
 		dispatch(setCategoryAction(params.category));
@@ -29,15 +28,22 @@ const ProductListPage = () => {
 
 	if (error) {
 		return (
-			<>
+			<Box textAlign={"center"}>
 				<Typography variant={"h3"}>Error</Typography>
-			</>
+			</Box>
 		);
 	}
 
+	if (loading) {
+		return (
+			<Box textAlign={"center"}>
+				<CircularProgress color="inherit" />
+			</Box>
+		);
+	}
 	return (
 		<>
-			{category && (
+			{category && child_categories && products && (
 				<CategoryDetail
 					category={category}
 					child_categories={child_categories}

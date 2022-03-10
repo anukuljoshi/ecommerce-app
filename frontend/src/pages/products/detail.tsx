@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import ProductDetail from "../../components/store/products/detail";
 
@@ -22,17 +22,17 @@ const ProductDetailPage = () => {
 
 	if (error) {
 		return (
-			<>
-				<Typography variant={"h4"}>Error</Typography>
-			</>
+			<Box textAlign={"center"}>
+				<Typography variant={"h3"}>Error</Typography>
+			</Box>
 		);
 	}
 
 	if (loading) {
 		return (
-			<>
-				<Typography variant={"h4"}>Loading...</Typography>
-			</>
+			<Box textAlign={"center"}>
+				<CircularProgress color="inherit" />
+			</Box>
 		);
 	}
 

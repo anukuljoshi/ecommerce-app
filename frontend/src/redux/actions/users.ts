@@ -46,7 +46,7 @@ export const getUserCartAction = () => {
 
 export const addProductToCartAction = (productId: string | number) => {
 	return (dispatch: AppDispatch) => {
-		dispatch({ type: ActionTypes.USER_DETAIL_LOADING });
+		// dispatch({ type: ActionTypes.USER_DETAIL_LOADING });
 		return axiosInstance
 			.post(`/users/cart/add/${productId}/`)
 			.then((res) => {
@@ -66,7 +66,7 @@ export const addProductToCartAction = (productId: string | number) => {
 
 export const removeProductFromCartAction = (productId: string | number) => {
 	return (dispatch: AppDispatch) => {
-		dispatch({ type: ActionTypes.USER_DETAIL_LOADING });
+		// dispatch({ type: ActionTypes.USER_DETAIL_LOADING });
 		axiosInstance
 			.post(`/users/cart/remove/${productId}/`)
 			.then((res) => {
@@ -106,6 +106,7 @@ export const getUserAddressAction = () => {
 
 export const createUserAddressAction = (data: any) => {
 	return (dispatch: AppDispatch) => {
+		dispatch({ type: ActionTypes.USER_ORDER_LOADING });
 		return axiosInstance
 			.post(`users/address/create/`, data)
 			.then((res) => {

@@ -28,8 +28,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
 		<Card>
 			<div>
 				<img
-					className={"h-full w-full object-cover"}
-					src={`${BASE_URL}${product.product_images[0].image}`}
+					className={"h-72 w-full object-cover"}
+					src={
+						product.product_images.length > 0
+							? `${BASE_URL}${product.product_images[0].image}`
+							: ""
+					}
 					alt={product.title}
 				/>
 			</div>

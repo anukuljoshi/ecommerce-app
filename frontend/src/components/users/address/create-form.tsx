@@ -27,7 +27,6 @@ const AddressCreateForm = ({ handleClose }: AddressCreateFormProps) => {
 				country: yup.string().required("Required"),
 			})}
 			onSubmit={(values, { setSubmitting, resetForm }) => {
-				console.log(values);
 				setSubmitting(false);
 				dispatch(createUserAddressAction(values))
 					.then((data) => {

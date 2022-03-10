@@ -3,8 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 import {
 	AppBar,
+	Box,
 	Container,
 	IconButton,
+	Menu,
+	MenuItem,
 	Stack,
 	Toolbar,
 	Typography,
@@ -16,12 +19,15 @@ import { logoutUserAction } from "../../redux/actions/auth";
 import { setThemeAction } from "../../redux/actions/theme";
 
 import { URLRoutes } from "../../constants/URLRoutes";
+import React, { useState } from "react";
 
 const Navbar = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const { user } = useSelector((state: IStoreState) => state.auth);
 	const { theme } = useSelector((state: IStoreState) => state.theme);
+
+	const [anchorElUser, setAnchorElUser] = useState<HTMLElement | null>(null);
 
 	const handleLogout = () => {
 		dispatch(logoutUserAction());
@@ -30,6 +36,14 @@ const Navbar = () => {
 
 	const handleChangeTheme = () => {
 		dispatch(setThemeAction());
+	};
+
+	const handleOpenUserMenu = (e: React.MouseEvent<HTMLElement>) => {
+		setAnchorElUser(e.currentTarget);
+	};
+
+	const handleCloseUserMenu = () => {
+		setAnchorElUser(null);
 	};
 
 	return (
@@ -68,26 +82,77 @@ const Navbar = () => {
 							</IconButton>
 						)}
 						{user ? (
-							<>
-								<Link
-									to={`/${URLRoutes.USER}/${URLRoutes.CART}`}
-								>
-									Cart
-								</Link>
-
-								<Link
-									to={`/${URLRoutes.USER}/${URLRoutes.ORDERS}`}
-								>
-									Orders
-								</Link>
+							<Box>
 								<span
-									className="cursor-pointer"
-									onClick={handleLogout}
+									onClick={handleOpenUserMenu}
+									className={"cursor-pointer"}
 								>
-									Log Out
+									{user.username}
 								</span>
-							</>
+								<Menu
+									id={"user-menu-appbar"}
+									anchorEl={anchorElUser}
+									anchorOrigin={{
+										vertical: "bottom",
+										horizontal: "right",
+									}}
+									transformOrigin={{
+										vertical: "top",
+										horizontal: "right",
+									}}
+									keepMounted
+									open={Boolean(anchorElUser)}
+									onClose={handleCloseUserMenu}
+								>
+									<Link to={`/${URLRoutes.USER}`}>
+										<MenuItem onClick={handleCloseUserMenu}>
+											<Typography>{"Profile"}</Typography>
+										</MenuItem>
+									</Link>
+									<Link
+										to={`/${URLRoutes.USER}/${URLRoutes.CART}`}
+									>
+										<MenuItem onClick={handleCloseUserMenu}>
+											<Typography>{"Cart"}</Typography>
+										</MenuItem>
+									</Link>
+									<Link
+										to={`/${URLRoutes.USER}/${URLRoutes.ORDERS}`}
+									>
+										<MenuItem onClick={handleCloseUserMenu}>
+											<Typography>{"Orders"}</Typography>
+										</MenuItem>
+									</Link>
+									<MenuItem
+										onClick={() => {
+											handleLogout();
+											handleCloseUserMenu();
+										}}
+									>
+										<Typography>{"Log Out"}</Typography>
+									</MenuItem>
+								</Menu>
+							</Box>
 						) : (
+							// <>
+							// 	<Link
+							// 		to={`/${URLRoutes.USER}/${URLRoutes.CART}`}
+							// 	>
+							// 		Cart
+							// 	</Link>
+
+							// 	<Link
+							// 		to={`/${URLRoutes.USER}/${URLRoutes.ORDERS}`}
+							// 	>
+							// 		Orders
+							// 	</Link>
+							// 	<span
+							// 		className="cursor-pointer"
+							// 		onClick={handleLogout}
+							// 	>
+							// 		Log Out
+							// 	</span>
+							// </>
 							<>
 								<Link to={`${URLRoutes.LOGIN}`}>Log in</Link>
 								<Link to={`${URLRoutes.SIGNUP}`}>Sign up</Link>

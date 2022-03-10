@@ -8,6 +8,7 @@ import LoginPage from "./pages/auth/login";
 import SignupPage from "./pages/auth/signup";
 import ProductListPage from "./pages/products/list";
 import ProductDetailPage from "./pages/products/detail";
+import UserProfilePage from "./pages/users/profile/profile";
 import UserCartPage from "./pages/users/cart";
 import OrderListPage from "./pages/users/orders/list";
 import OrderCreatePage from "./pages/users/orders/create";
@@ -28,12 +29,15 @@ const MainRoutes = () => {
 					path={"category/:category/products/:product"}
 					element={<ProductDetailPage />}
 				/>
-				<Route path={"user/cart"} element={<UserCartPage />} />
-				<Route path={"user/orders"} element={<OrderListPage />} />
-				<Route
-					path={"user/orders/create"}
-					element={<OrderCreatePage />}
-				/>
+				<Route path={"user"}>
+					<Route path={""} element={<UserProfilePage />} />
+					<Route path={"cart"} element={<UserCartPage />} />
+					<Route path={"orders"} element={<OrderListPage />} />
+					<Route
+						path={"orders/create"}
+						element={<OrderCreatePage />}
+					/>
+				</Route>
 			</Route>
 			<Route path={`${URLRoutes.SIGNUP}`} element={<UnAuthRoute />}>
 				<Route path={""} element={<SignupPage />} />

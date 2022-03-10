@@ -21,6 +21,18 @@ export const productListReducer = (
 	action: any
 ): IProductListState => {
 	switch (action.type) {
+		case ActionTypes.PRODUCT_LIST_LOADING:
+			return {
+				...state,
+				error: false,
+				loading: true,
+			};
+		case ActionTypes.PRODUCT_LIST_ERROR:
+			return {
+				...state,
+				error: true,
+				loading: false,
+			};
 		case ActionTypes.SET_CATEGORY:
 			return {
 				...state,
@@ -41,21 +53,6 @@ export const productListReducer = (
 				error: false,
 				loading: false,
 				products: action.payload,
-			};
-
-		case ActionTypes.PRODUCT_LIST_LOADING:
-			return {
-				...state,
-				error: false,
-				loading: true,
-				products: [],
-				child_categories: [],
-			};
-		case ActionTypes.PRODUCT_LIST_ERROR:
-			return {
-				...state,
-				error: true,
-				loading: false,
 			};
 		default:
 			return state;
@@ -85,18 +82,18 @@ export const productDetailReducer = (
 				loading: true,
 				error: false,
 			};
+		case ActionTypes.PRODUCT_DETAIL_ERROR:
+			return {
+				...state,
+				loading: false,
+				error: true,
+			};
 		case ActionTypes.PRODUCT_DETAIL_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				error: false,
 				product: action.payload,
-			};
-		case ActionTypes.PRODUCT_DETAIL_ERROR:
-			return {
-				...state,
-				loading: false,
-				error: true,
 			};
 		default:
 			return state;

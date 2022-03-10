@@ -37,7 +37,7 @@ const OrderItemList = ({ items }: OrderItemListProps) => {
 			</TableHead>
 			<TableBody>
 				{items.map((item, index) => (
-					<OrderItemListItem item={item} index={index} />
+					<OrderItemListItem item={item} index={index} key={index} />
 				))}
 			</TableBody>
 		</Table>

@@ -1,4 +1,6 @@
 import { Box, Card, Stack, Typography } from "@mui/material";
+import dayjs from "dayjs";
+import AddressLabel from "../address/label";
 
 import OrderItemList from "./items/list";
 
@@ -15,9 +17,17 @@ const OrderListItem = ({ order }: OrderListItemProps) => {
 						variant={"h6"}
 					>{`Order #${order.pk}`}</Typography>
 					<Typography variant={"body1"}>
-						{`Order Date: ${order.order_date}`}
+						{`Order Date: ${dayjs(order.order_date).format(
+							"MMM DD, YYYY"
+						)}`}
 					</Typography>
 				</Stack>
+				{order.shipping_address && (
+					<Stack direction={"row"} spacing={2}>
+						<Typography>{`Delivery Address: `}</Typography>
+						<AddressLabel address={order.shipping_address} />
+					</Stack>
+				)}
 				<div>
 					<OrderItemList items={order.order_items} />
 					<Box textAlign={"right"}>

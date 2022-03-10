@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Grid, Typography } from "@mui/material";
 
 import Cart from "../../components/users/cart/cart";
 
@@ -13,7 +13,7 @@ import {
 
 const UserCartPage = () => {
 	const dispatch = useAppDispatch();
-	const { error, user, cart } = useSelector(
+	const { loading, error, user, cart } = useSelector(
 		(state: IStoreState) => state.users.detail
 	);
 
@@ -24,9 +24,17 @@ const UserCartPage = () => {
 
 	if (error) {
 		return (
-			<>
+			<Box textAlign={"center"}>
 				<Typography variant={"h3"}>Error</Typography>
-			</>
+			</Box>
+		);
+	}
+
+	if (loading) {
+		return (
+			<Box textAlign={"center"}>
+				<CircularProgress color="inherit" />
+			</Box>
 		);
 	}
 

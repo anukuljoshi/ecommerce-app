@@ -2,7 +2,7 @@ import { Modal, Stack, Typography } from "@mui/material";
 
 import AddressCreateForm from "./create-form";
 
-interface AddressCreateProps {
+interface AddressCreateModalProps {
 	open: boolean;
 	handleOpen: () => void;
 	handleClose: () => void;
@@ -17,22 +17,22 @@ const modalStyle = {
 	bgcolor: "background.paper",
 	overflow: "auto",
 	height: "80%",
+	px: 5,
+	py: 2,
 };
 
-const AddressCreate = ({
+const AddressCreateModal = ({
 	open,
 	handleOpen,
 	handleClose,
-}: AddressCreateProps) => {
+}: AddressCreateModalProps) => {
 	return (
 		<Modal open={open} onClose={handleClose}>
-			<Stack sx={modalStyle}>
-				<div className="py-3 mb text-center bg-slate-800">
-					<Typography variant={"h5"}>
-						{"Add a new address"}
-					</Typography>
-				</div>
-				<div className="px-10 py-5">
+			<Stack sx={modalStyle} spacing={2}>
+				<Typography variant={"h5"} textAlign={"center"}>
+					{"Add a new address"}
+				</Typography>
+				<div>
 					<AddressCreateForm handleClose={handleClose} />
 				</div>
 			</Stack>
@@ -40,4 +40,4 @@ const AddressCreate = ({
 	);
 };
 
-export default AddressCreate;
+export default AddressCreateModal;

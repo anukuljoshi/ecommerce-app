@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 
 import CategoriesList from "../components/store/categories/list";
 
@@ -10,7 +10,7 @@ import { getCategoryListAction } from "../redux/actions/products";
 
 const HomePage = () => {
 	const dispatch = useAppDispatch();
-	const { error, child_categories } = useSelector(
+	const { loading, error, child_categories } = useSelector(
 		(store: IStoreState) => store.products.list
 	);
 
@@ -19,12 +19,26 @@ const HomePage = () => {
 	}, [dispatch]);
 
 	if (error) {
-		return <Typography variant={"h3"}>Error</Typography>;
+		return (
+			<Box textAlign={"center"}>
+				<Typography variant={"h3"}>Error</Typography>
+			</Box>
+		);
+	}
+
+	if (loading) {
+		return (
+			<Box textAlign={"center"}>
+				<CircularProgress color="inherit" />
+			</Box>
+		);
 	}
 
 	return (
 		<>
-			<CategoriesList categories={child_categories} />
+			{child_categories.length > 0 && (
+				<CategoriesList categories={child_categories} />
+			)}
 		</>
 	);
 };

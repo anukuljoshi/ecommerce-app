@@ -22,7 +22,7 @@ class MyUserCreateSerializer(serializers.ModelSerializer):
         return super(MyUserCreateSerializer, self).create(validated_data)
 
 
-class AddressSerializer(serializers.ModelSerializer):
+class AddressCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = [
@@ -46,6 +46,21 @@ class AddressSerializer(serializers.ModelSerializer):
         instance.default = validated_data.get("default", instance.default)
         instance.save()
         return instance
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = [
+            "pk",
+            "user",
+            "location1",
+            "location2",
+            "location3",
+            "city",
+            "country",
+            "default",
+        ]
 
 
 class MyUserSerializer(serializers.ModelSerializer):
@@ -85,9 +100,23 @@ class OrderItemSerializer(serializers.ModelSerializer):
         ]
 
 
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = [
+            "pk",
+            "user",
+            "start_date",
+            "order_date",
+            "ordered",
+            "shipping_address",
+        ]
+
+
 class OrderSerializer(serializers.ModelSerializer):
     total = serializers.FloatField(source="get_total")
     order_items = OrderItemSerializer(many=True)
+    shipping_address = AddressSerializer()
 
     class Meta:
         model = Order

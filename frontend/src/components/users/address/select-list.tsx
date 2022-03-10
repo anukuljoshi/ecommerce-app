@@ -21,7 +21,7 @@ const AddressSelectList = ({
 }: AddressSelectListProps) => {
 	return (
 		<FormControl>
-			<FormLabel sx={{ mb: 2 }}>Select Address</FormLabel>
+			<FormLabel sx={{ mb: 1 }}>Select Address</FormLabel>
 			<RadioGroup
 				value={selectedAddress}
 				onChange={(e) => setSelectedAddress(e.target.value)}
@@ -32,7 +32,7 @@ const AddressSelectList = ({
 						value={address.pk}
 						control={<Radio />}
 						key={index}
-						sx={{ mb: 2 }}
+						sx={{ mb: 1 }}
 					/>
 				))}
 			</RadioGroup>

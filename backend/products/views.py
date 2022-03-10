@@ -14,7 +14,7 @@ from .serializers import (
 from users.models import MyUser, Address, Order, OrderItem
 from users.serializers import (
     MyUserSerializer,
-    AddressSerializer,
+    AddressCreateSerializer,
     OrderSerializer,
     OrderItemSerializer,
     OrderItemCreateSerializer,
