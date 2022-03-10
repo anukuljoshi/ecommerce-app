@@ -58,7 +58,7 @@ export const addProductToCartAction = (productId: string | number) => {
 				}
 			})
 			.catch((error) => {
-				console.log("get user cart action", error);
+				console.log("add product to cart action", error);
 				dispatch({ type: ActionTypes.USER_DETAIL_ERROR });
 			});
 	};
@@ -78,7 +78,7 @@ export const removeProductFromCartAction = (productId: string | number) => {
 				}
 			})
 			.catch((error) => {
-				console.log("get user cart action", error);
+				console.log("remove product from cart action", error);
 				dispatch({ type: ActionTypes.USER_DETAIL_ERROR });
 			});
 	};
@@ -157,7 +157,7 @@ export const getUserOrdersAction = () => {
 				}
 			})
 			.catch((error) => {
-				console.log("get user list action", error);
+				console.log("get user orders action", error);
 				dispatch({ type: ActionTypes.USER_ORDER_ERROR });
 			});
 	};
