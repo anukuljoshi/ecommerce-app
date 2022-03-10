@@ -12,6 +12,7 @@ from .serializers import (
     MyUserSerializer,
     AddressCreateSerializer,
     AddressSerializer,
+    OrderCreateSerializer,
     OrderSerializer,
     OrderItemSerializer,
     OrderItemCreateSerializer,
@@ -120,10 +121,10 @@ def create_user_address(request, *args, **kwargs):
 @permission_classes([IsAuthenticated])
 def update_user_address(request, *args, **kwargs):
     user = request.user
-    addressId = kwargs.get("addressId")
+    addressPk = kwargs.get("addressPk")
 
     # find the address to be update
-    address = Address.objects.filter(pk=addressId).first()
+    address = Address.objects.filter(user=user, pk=addressPk).first()
 
     if not address:
         # address not found return 404
@@ -145,6 +146,32 @@ def update_user_address(request, *args, **kwargs):
     return Response(address_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(["DELETE"])
+@permission_classes([IsAuthenticated])
+def delete_user_address(request, *args, **kwargs):
+    user = request.user
+    addressPk = kwargs.get("addressPk")
+
+    # find the address to be deleted
+    address = Address.objects.filter(user=user, pk=addressPk).first()
+
+    if not address:
+        # address not found return 404
+        return Response({"message": "not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    # copy address
+    addressCopy = address
+
+    # delete address
+    address.delete()
+
+    # serialize copied address
+    address_serializer = AddressSerializer(addressCopy)
+
+    # return deleted address
+    return Response(address_serializer.data, status=status.HTTP_200_OK)
+
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def get_cart(request, *args, **kwargs):
@@ -162,10 +189,10 @@ def get_cart(request, *args, **kwargs):
 @permission_classes([IsAuthenticated])
 def add_to_cart(request, *args, **kwargs):
     user = request.user
-    productId = kwargs["productId"]
+    productPk = kwargs["productPk"]
 
     # find product to add to cart
-    product = Product.objects.filter(pk=productId).first()
+    product = Product.objects.filter(pk=productPk).first()
 
     # not found
     if not product:
@@ -199,10 +226,10 @@ def add_to_cart(request, *args, **kwargs):
 @permission_classes([IsAuthenticated])
 def remove_from_cart(request, *args, **kwargs):
     user = request.user
-    productId = kwargs["productId"]
+    productPk = kwargs["productPk"]
 
     # find product to remove from cart
-    product = Product.objects.filter(pk=productId).first()
+    product = Product.objects.filter(pk=productPk).first()
 
     # not found
     if not product:

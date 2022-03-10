@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -19,7 +20,6 @@ import { logoutUserAction } from "../../redux/actions/auth";
 import { setThemeAction } from "../../redux/actions/theme";
 
 import { URLRoutes } from "../../constants/URLRoutes";
-import React, { useState } from "react";
 
 const Navbar = () => {
 	const dispatch = useAppDispatch();
@@ -134,25 +134,6 @@ const Navbar = () => {
 								</Menu>
 							</Box>
 						) : (
-							// <>
-							// 	<Link
-							// 		to={`/${URLRoutes.USER}/${URLRoutes.CART}`}
-							// 	>
-							// 		Cart
-							// 	</Link>
-
-							// 	<Link
-							// 		to={`/${URLRoutes.USER}/${URLRoutes.ORDERS}`}
-							// 	>
-							// 		Orders
-							// 	</Link>
-							// 	<span
-							// 		className="cursor-pointer"
-							// 		onClick={handleLogout}
-							// 	>
-							// 		Log Out
-							// 	</span>
-							// </>
 							<>
 								<Link to={`${URLRoutes.LOGIN}`}>Log in</Link>
 								<Link to={`${URLRoutes.SIGNUP}`}>Sign up</Link>

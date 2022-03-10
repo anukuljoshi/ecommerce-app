@@ -62,7 +62,7 @@ export const userAddressReducer = (
 	state = userAddressState,
 	action: any
 ): IUserAddressState => {
-	let address_list;
+	let address_list, index;
 	switch (action.type) {
 		case ActionTypes.USER_ADDRESS_LOADING:
 			return {
@@ -99,6 +99,18 @@ export const userAddressReducer = (
 				error: false,
 				list: address_list,
 			};
+		case ActionTypes.USER_ADDRESS_DELETE:
+			address_list = [...state.list];
+			index = address_list.findIndex(
+				(address) => address.pk === action.payload.pk
+			);
+			address_list.splice(index, 1);
+			return {
+				...state,
+				loading: false,
+				error: false,
+				list: address_list,
+			};
 		default:
 			return state;
 	}
@@ -120,7 +132,7 @@ export const userOrderReducer = (
 	state = userOrderState,
 	action: any
 ): IUserOrderState => {
-    let tempOrders;
+	let tempOrders;
 	switch (action.type) {
 		case ActionTypes.USER_ORDER_LOADING:
 			return {
@@ -141,10 +153,10 @@ export const userOrderReducer = (
 				error: false,
 				orders: action.payload,
 			};
-            
+
 		case ActionTypes.USER_ORDER_CREATE:
-            tempOrders = [...state.orders];
-            tempOrders.unshift(action.payload);
+			tempOrders = [...state.orders];
+			tempOrders.unshift(action.payload);
 			return {
 				...state,
 				loading: false,

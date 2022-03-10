@@ -124,6 +124,25 @@ export const createUserAddressAction = (data: any) => {
 	};
 };
 
+export const deleteUserAddressAction = (addressPk: string | number) => {
+	return (dispatch: AppDispatch) => {
+		axiosInstance
+			.delete(`users/address/${addressPk}/delete/`)
+			.then((res) => {
+				if (res.status === 200) {
+					dispatch({
+						type: ActionTypes.USER_ADDRESS_DELETE,
+						payload: res.data,
+					});
+				}
+			})
+			.catch((error) => {
+				console.log("delete user address action", error);
+				dispatch({ type: ActionTypes.USER_ADDRESS_ERROR });
+			});
+	};
+};
+
 export const getUserOrdersAction = () => {
 	return (dispatch: AppDispatch) => {
 		dispatch({ type: ActionTypes.USER_ORDER_LOADING });
