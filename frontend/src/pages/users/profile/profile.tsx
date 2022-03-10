@@ -78,14 +78,16 @@ const UserProfilePage = () => {
 								No address
 							</Typography>
 						)}
-						<Button
-							variant={"text"}
-							size={"small"}
-							onClick={handleOpen}
-							startIcon={<AddRounded />}
-						>
-							Add New Address
-						</Button>
+						<Box sx={{ mt: 1 }}>
+							<Button
+								variant={"text"}
+								size={"small"}
+								onClick={handleOpen}
+								startIcon={<AddRounded />}
+							>
+								Add New Address
+							</Button>
+						</Box>
 						<AddressCreateModal
 							open={modalOpen}
 							handleOpen={handleOpen}
